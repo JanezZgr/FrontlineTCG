@@ -36,6 +36,39 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Card.CostManpower)
         </dd>
+        @if (Model.UnitCard != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitCard.HP)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitCard.HP)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitCard.DmgUnarmored)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitCard.DmgUnarmored)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitCard.DmgArmored)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitCard.DmgArmored)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitCard.DmgStructure)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitCard.DmgStructure)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UnitCard.DmgAir)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UnitCard.DmgAir)
+            </dd>
+        }
     </dl>
     
     <form method="post">

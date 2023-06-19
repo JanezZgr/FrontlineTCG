@@ -23,6 +23,7 @@ namespace FrontlineTCG.Web.Pages.Cards
 
         [BindProperty]
       public Card Card { get; set; } = default!;
+        public UnitCard UnitCard { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -40,6 +41,7 @@ namespace FrontlineTCG.Web.Pages.Cards
             else 
             {
                 Card = card;
+                UnitCard= await _context.UnitCards.FirstOrDefaultAsync(m=>m.Card==Card.Id);
             }
             return Page();
         }
