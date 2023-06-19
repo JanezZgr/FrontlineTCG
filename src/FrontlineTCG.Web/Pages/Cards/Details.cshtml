@@ -1,0 +1,123 @@
+﻿@page
+@model FrontlineTCG.Web.Pages.Cards.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+<h1>Details</h1>
+
+<div>
+    <h4>Card</h4>
+    <hr />
+    <table >
+        <tr>
+            <th>
+                @Model.FullCardInfo.CardName
+            </th>
+            <th>
+                @Model.FullCardInfo.CardType
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.FullCardInfo.icon)" width="200" height="200" />
+            </td>
+        </tr>
+        <tr>
+            <td> <a asp-page="../CardAbilities/Details" asp-route-id="@Model.FullCardInfo.Ability1ID">@Model.FullCardInfo.Ability1Name</a></td>
+            <td><a asp-page="../CardAbilities/Details" asp-route-id="@Model.FullCardInfo.Ability2ID">@Model.FullCardInfo.Ability2Name</a></td>
+        </tr>
+        @if (Model.FullCardInfo.CardType == FrontlineTCG.CardType.Unarmored || Model.FullCardInfo.CardType == FrontlineTCG.CardType.Armored
+        || Model.FullCardInfo.CardType == FrontlineTCG.CardType.Structure || Model.FullCardInfo.CardType == FrontlineTCG.CardType.Air)
+        {
+            <tr>
+                <td colspan="2">HP: @Model.FullCardInfo.HP</td>
+
+            </tr>
+            <tr>
+                <td colspan="2">Damage:</td>
+
+            </tr>
+            <tr>
+                <td>UN: @Model.FullCardInfo.DmgArmored</td>
+                <td>AM: @Model.FullCardInfo.DmgUnarmored</td>
+            </tr>
+            <tr>
+                <td>AA: @Model.FullCardInfo.DmgAir</td>
+                <td>ST: @Model.FullCardInfo.DmgStructure</td>
+            </tr>
+
+        }
+
+    </table>
+    <!--
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullCardInfo.CardType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullCardInfo.CardType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullCardInfo.CardName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullCardInfo.CardName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullCardInfo.CostMaterial)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullCardInfo.CostMaterial)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullCardInfo.CostManpower)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullCardInfo.CostManpower)
+        </dd>
+    </dl> -->
+</div>
+   
+<div>
+                        @if (Model.logdIn)
+                    {
+    <a asp-page="./Edit2" asp-route-id="@Model.Card?.Id">Edit</a> 
+                    }
+    <a asp-page="./Index">Back to List</a>
+        <a asp-page="./CreateFeedback" asp-route-id="@Model.Card?.Id">Send Feedback</a>
+
+        @if (Model.CardFeedback != null)
+        {
+            <div>Feedback:</div>
+            foreach( var item in Model.CardFeedback)
+            {
+            <hr />
+                <table><tr>
+                    <td>Balance score</td>
+                    <td>
+                @Html.DisplayFor(modelItem => item.BalanceScore)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Comment</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Posted at</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimePosted)
+                        </td>
+                    </tr>
+                </table>
+
+            }
+        }
+    </div>

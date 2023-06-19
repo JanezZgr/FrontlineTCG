@@ -1,0 +1,52 @@
+﻿@page
+@model FrontlineTCG.Web.Pages.Cards.CreateFeedbackModel
+
+@{
+    ViewData["Title"] = "Send Feedback";
+}
+
+<h1>Send Feedback</h1>
+
+<h4>CardFeedback</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         <!--  <div class="form-group" hidden>
+                <label asp-for="CardFeedback.UserPosted" class="control-label"></label>
+                <input asp-for="CardFeedback.UserPosted" class="form-control" />
+                <span asp-validation-for="CardFeedback.UserPosted" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CardFeedback.Card" class="control-label"></label>
+                <select asp-for="CardFeedback.Card" class="form-control" asp-items="ViewBag.Card"></select>
+                <span asp-validation-for="CardFeedback.Card" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="CardFeedback.TimePosted" class="control-label"></label>
+                <input asp-for="CardFeedback.TimePosted" class="form-control" />
+                <span asp-validation-for="CardFeedback.TimePosted" class="text-danger"></span>
+               </div>-->
+            <div class="form-group">
+                <label  class="control-label"> Balance (0- unusably bad; 3- fair; 5- game breaking overpowered)</label>
+                <input asp-for="CardFeedback.BalanceScore" class="form-control" />
+                <span asp-validation-for="CardFeedback.BalanceScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label"> Comment</label>
+                <input asp-for="CardFeedback.Text" class="form-control" />
+                <span asp-validation-for="CardFeedback.Text" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="CardFeedback.Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

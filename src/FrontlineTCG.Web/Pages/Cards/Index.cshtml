@@ -1,0 +1,65 @@
+﻿@page
+@model FrontlineTCG.Web.Pages.Cards.IndexModel
+
+@{
+    ViewData["Title"] = "Cards";
+}
+
+<h1>Cards</h1>
+
+<p>
+    @if (Model.logdIn)
+    {
+          <a asp-page="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Card[0].CardType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Card[0].CardName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Card[0].CostMaterial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Card[0].CostManpower)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Card) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostManpower)
+            </td>
+               
+                <td>
+               
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    @if (Model.logdIn)
+                    {
+                        <a asp-page="./Edit2" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                   
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

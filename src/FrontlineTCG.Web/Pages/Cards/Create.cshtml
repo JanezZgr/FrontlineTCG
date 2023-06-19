@@ -1,0 +1,67 @@
+﻿@page
+@model FrontlineTCG.Web.Pages.Cards.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Card</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Card.CardType" class="control-label"></label>
+
+                <select asp-for="Card.CardType" asp-items="Html.GetEnumSelectList<FrontlineTCG.CardType>()"class="form-select form-control valid" data-val="true" id="C_CardType"
+                        name="Card.CardType" aria-describedby="Card_CardType" aria-invalid="false">
+                    </select>
+                <span asp-validation-for="Card.CardType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.CardName" class="control-label"></label>
+                <input asp-for="Card.CardName" class="form-control" />
+                <span asp-validation-for="Card.CardName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.CostMaterial" class="control-label"></label>
+                <input asp-for="Card.CostMaterial" class="form-control" />
+                <span asp-validation-for="Card.CostMaterial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Card.CostManpower" class="control-label"></label>
+                <input asp-for="Card.CostManpower" class="form-control" />
+                <span asp-validation-for="Card.CostManpower" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Card.Ability1" class="control-label"></label>
+                @Html.DropDownListFor(md=>md.Card.Ability1,new SelectList(Model.Abilities,"Id","AbilityName"),string.Empty,new {@class="form-select form-control valid"} )
+            </div>
+
+            <div class="form-group">
+                
+                <label asp-for="FileUpload.FormFile" class="control-label"/>
+                <input asp-for="FileUpload.FormFile" type="file" class="form-control">
+                <!--  <input asp-page-handler="Upload" class="btn" type="submit" value="Upload">-->
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

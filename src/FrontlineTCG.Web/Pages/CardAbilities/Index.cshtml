@@ -1,0 +1,58 @@
+﻿@page
+@model FrontlineTCG.Web.Pages.CardAbilities.IndexModel
+
+@{
+    ViewData["Title"] = "Card abilities";
+}
+
+<h1>Card abilities</h1>
+
+<p>
+    @if (Model.logdIn)
+    {  <a asp-page="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CardAbility[0].AbilityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardAbility[0].AbilityDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardAbility[0].ActivationCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardAbility[0].ActivationRange)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CardAbility) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbilityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbilityDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivationCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivationRange)
+            </td>
+            <td>
+                    @if (Model.logdIn)
+                    {
+                        <a asp-page="./Edit2" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

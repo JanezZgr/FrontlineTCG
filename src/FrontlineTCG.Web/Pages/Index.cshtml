@@ -1,0 +1,109 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using FrontlineTCG.Localization
+@using Volo.Abp.Users
+@model FrontlineTCG.Web.Pages.IndexModel
+@inject IHtmlLocalizer<FrontlineTCGResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+<abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+<abp-script src="/Pages/Index.js" />
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+    a{ padding: 2px;}
+</style>
+
+<div class="container">
+    <div class="p-5">
+
+        <table>
+            <tr>
+                <td colspan="2">
+                    Information
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a asp-page="CardAbilities/Index">Abilities</a><br />
+                </td><td>
+                    <a asp-page="Cards/Index">Cards</a>
+                </td>
+            </tr>
+        </table>
+        <h1>Rules</h1>
+        <h2> Before the battle</h2>
+        <p>-You start with 10 manpower and 10 material tokens. </p>
+        <p>-You play on a 5x6 board,with the last row reserved for air cards. : </p>
+        <p>-Both players start with the 2 nearest columns owned by them. Air cannot be owned. Board at the start</p>
+        <table>
+            <tr>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid blue" width="150px">Air</td>
+            </tr>
+            <tr>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid red" width="150px">Enemy space</td>
+                <td style="border:3px solid blue" width="150px">Air</td>
+            </tr>
+            <tr>
+                <td style="border:3px solid black"> Unowned</td>
+                <td style="border:3px solid black">Unowned</td>
+                <td style="border:3px solid black">Unowned</td>
+                <td style="border:3px solid black">Unowned</td>
+                <td style="border:3px solid black">Unowned</td>
+                <td style="border:3px solid blue">Air</td>
+            </tr>
+            <tr>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid blue">Air</td>
+            </tr>
+            <tr>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid green">Your space</td>
+                <td style="border:3px solid blue">Air</td>
+            </tr>
+        </table>
+        <p></p>
+   
+        <p>-You lose when you have less than 6 owned spaces.</p>
+        
+        <h2> During your turn</h2>
+        <p>-You start by drawing 2 cards and gaining 3 manpower and 3 material.</p>
+        <p>-You can spend material and manpower to place cards as active(facing up) or hidden(facing down) on your owned spaces(except for air).</p>
+        <p>-Once per turn ctive cards can move 1 space and attack or assist attacks and activate its abilities(a limited ammount of times per turn, with limited range). Hidden cards can only be revealed.</p>
+        <p>-Structures cannot move, abilities and sabotage cannot attack or move, air cards can only move in air.</p>
+        <p>-Only 1 card can occupy a space. While moving you can swap cards on the board.</p>
+
+        <h2> Combat</h2>
+        <p>-An active card can activate an attack against a neighboring enemy card. One neighboring allied card can assist with the attack.</p>
+        <p>-If the combined damage of the attackers(for the desired card type) exceeds the target's HP the target is destroyed. If possible the main attacker than moves to the target space and captures it.</p>
+        <p>-If the combined damage of the attackers(for the desired card type) is less than the target's HP the attacker and its assistant are both disabled(cannot move, attack or assist during the next turn)</p>
+        <p>-Ability and sabotage cards automatically die to anything other than air cards.</p>
+        <p>-Air cards count as neighboring to all cards and can attack and assist against anything, however they cannot attack abilities or sabotage cards.</p>
+     
+
+
+        
+  
+    </div>
+</div>
