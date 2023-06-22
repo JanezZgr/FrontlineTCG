@@ -58,17 +58,20 @@ namespace FrontlineTCG.Web.Pages.Cards
 
             using (var memoryStream = new MemoryStream())
             {
-                await FileUpload.FormFile.CopyToAsync(memoryStream);
+                if (FileUpload.FormFile.ContentType.Contains("image"))
+                {
+                    await FileUpload.FormFile.CopyToAsync(memoryStream);
+                    if (memoryStream.Length < 2097152)
+                    {
 
-                // Upload the file if less than 2 MB
-                if (memoryStream.Length < 2097152)
-                {
-                    byte[] bArr= memoryStream.ToArray();
-                    Card.Icon = bArr;
-                }
-                else
-                {
-                    ModelState.AddModelError("File", "The file is too large.");
+
+                        byte[] bArr = memoryStream.ToArray();
+                        Card.Icon = bArr;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("File", "The file is too large."); return Page();
+                    }
                 }
             }
             Card.setID(Guid.NewGuid());

@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Net.Mime;
 
 namespace FrontlineTCG.Web.Pages.Cards
 {
@@ -60,7 +62,7 @@ namespace FrontlineTCG.Web.Pages.Cards
             Abilities=_context.CardAbilities.ToList();
             FileUpload = new BufferedSingleFileUploadDb();
             iconholder = card.Icon;
-           
+          
             return Page();
         }
 
@@ -81,17 +83,20 @@ namespace FrontlineTCG.Web.Pages.Cards
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await FileUpload.FormFile.CopyToAsync(memoryStream);
+                    if (FileUpload.FormFile.ContentType.Contains("image"))
+                    {
+                        await FileUpload.FormFile.CopyToAsync(memoryStream);
+                        if (memoryStream.Length < 2097152)
+                        {
 
-                    // Upload the file if less than 2 MB
-                    if (memoryStream.Length < 2097152)
-                    {
-                        byte[] bArr = memoryStream.ToArray();
-                        Card.Icon = bArr;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("File", "The file is too large.");
+
+                            byte[] bArr = memoryStream.ToArray();
+                            Card.Icon = bArr;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("File", "The file is too large."); return Page();
+                        }
                     }
                 }
             }
